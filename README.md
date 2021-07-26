@@ -26,7 +26,7 @@ Simple image gallery application created with swift 5 & iOS 14.5
 ## Implementation 
 - By defult search is already set 'kittens'
 - Pagination also implemented when user scrolls to the bottom
-- Failure conditions managed byt showing alert
+- Failure conditions managed by showing alert
 - Needs required search parameter to get the images data
 
 
