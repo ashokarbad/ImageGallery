@@ -24,9 +24,9 @@ Simple image gallery application created with swift 5 & iOS 14.5
 - View : Contains collection view cell & controller to display actual output
 
 ## Implementation 
-- by defult search is already set 'kittens'
-- pagination also implemented when user scrolls to the bottom
-- failure conditions managed byt showing alert
-- needs required search parameter to get the images data
+- By defult search is already set 'kittens'
+- Pagination also implemented when user scrolls to the bottom
+- Failure conditions managed byt showing alert
+- Needs required search parameter to get the images data
 
 
