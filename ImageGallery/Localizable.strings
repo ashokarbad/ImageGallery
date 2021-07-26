@@ -1,0 +1,9 @@
+/* 
+  Localizable.strings
+  ImageGallery
+
+  Created by Ashok on 24/07/21.
+  
+*/
+label.alert.ImageData.noDataMessage = "No image data found.";
+label.alert.ImageData.buttonTitle="Continue";
