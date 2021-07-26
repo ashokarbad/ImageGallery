@@ -14,23 +14,25 @@ class ViewController: UIViewController {
     @IBOutlet weak var imageCollectionView: UICollectionView?
     private var photosArray = [ImageDataViewModel]()
     let columnCount : CGFloat = 3
+    var page = 1
     
     // MARK: - LifeCycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        imageSearchBar?.text = "kittens"
         getImagesFromServer(searchText: "kittens")
     }
     
     // MARK: - Private
     
-   private func getImagesFromServer(searchText:String) {
+    private func getImagesFromServer(searchText:String) {
         self.activityIndicator?.startAnimating()
-        let urlString = Utils().getUserDefinedParameter(keyName: Constant.imageUrlKey) + "\(searchText)";
+        let urlString = Utils().getFlickerAPIUrl(searchText: searchText, page: page)
         APIService.sharedInstance.getImagesWithUrl(urlString: urlString) { imageDataModel, error in
             self.activityIndicator?.stopAnimating()
             if imageDataModel?.stat == "ok",imageDataModel?.photos?.photo.count ?? 0 > 0{
-                self.photosArray = imageDataModel?.photos?.photo.map({ImageDataViewModel(photo: Photo(id: $0.id, owner: $0.owner, secret: $0.secret, server: $0.server, farm: $0.farm, title: $0.title))}) ?? []
+                self.photosArray.append(contentsOf: imageDataModel?.photos?.photo.map({ImageDataViewModel(photo: Photo(id: $0.id, owner: $0.owner, secret: $0.secret, server: $0.server, farm: $0.farm, title: $0.title))}) ?? [])
                 self.imageCollectionView?.reloadData()
             }else{
                 CustomAlert().showAlertWithMessage(message: NSLocalizedString("label.alert.ImageData.noDataMessage", comment: ""), title: "")
@@ -41,7 +43,7 @@ class ViewController: UIViewController {
 
 // MARK: - CollectionView
 
-extension ViewController : UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
+extension ViewController : UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UICollectionViewDelegate{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return photosArray.count
@@ -63,6 +65,13 @@ extension ViewController : UICollectionViewDataSource,UICollectionViewDelegateFl
         }
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if (indexPath.row == photosArray.count - 1 ) {
+            guard let searchText = imageSearchBar?.searchTextField.text,!searchText.isEmpty else { return }
+            page += 1; getImagesFromServer(searchText: searchText)
+        }
+    }
 }
 
 // MARK: - SearchBar
@@ -71,7 +80,9 @@ extension ViewController : UISearchBarDelegate{
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         self.view.endEditing(true)
         guard let searchText = searchBar.searchTextField.text,!searchText.isEmpty else { return }
-        getImagesFromServer(searchText: searchText)
+        photosArray = [ImageDataViewModel]()
+        imageCollectionView?.reloadData()
+        page = 1; getImagesFromServer(searchText: searchText)
     }
 }
 

@@ -15,6 +15,10 @@ class Utils: NSObject {
         }
         return ""
     }
+    
+    func getFlickerAPIUrl(searchText:String,page:Int) -> String {
+        return getUserDefinedParameter(keyName: Constant.imageUrlKey) + "\(searchText)" + "&page=\(page)";
+    }
 }
 
 class CustomAlert {
