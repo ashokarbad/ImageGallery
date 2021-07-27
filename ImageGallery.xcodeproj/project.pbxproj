@@ -15,6 +15,9 @@
 		E82BB44626AAB27400EDA7BC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E82BB44426AAB27400EDA7BC /* LaunchScreen.storyboard */; };
 		E82BB44E26AAB54300EDA7BC /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82BB44D26AAB54300EDA7BC /* ImageCollectionViewCell.swift */; };
 		E82BB45426AAC72F00EDA7BC /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E82BB45326AAC72F00EDA7BC /* APIService.swift */; };
+		E830665C26B059F70064451C /* DynamicValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = E830665B26B059F70064451C /* DynamicValue.swift */; };
+		E830665E26B05A110064451C /* GenericDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E830665D26B05A110064451C /* GenericDataSource.swift */; };
+		E830666226B05A7F0064451C /* ImageDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = E830666126B05A7F0064451C /* ImageDataSource.swift */; };
 		E8A942D026ABFC5C00B8C9BC /* ImageDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A942CF26ABFC5C00B8C9BC /* ImageDataModel.swift */; };
 		E8A942D426ABFEFE00B8C9BC /* ImageDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A942D326ABFEFE00B8C9BC /* ImageDataViewModel.swift */; };
 		E8A942DA26AC164F00B8C9BC /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A942D926AC164F00B8C9BC /* Utils.swift */; };
@@ -32,6 +35,9 @@
 		E82BB44726AAB27400EDA7BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E82BB44D26AAB54300EDA7BC /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		E82BB45326AAC72F00EDA7BC /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		E830665B26B059F70064451C /* DynamicValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DynamicValue.swift; path = ImageGallery/ViewModel/DynamicValue.swift; sourceTree = SOURCE_ROOT; };
+		E830665D26B05A110064451C /* GenericDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GenericDataSource.swift; path = ImageGallery/ViewModel/GenericDataSource.swift; sourceTree = SOURCE_ROOT; };
+		E830666126B05A7F0064451C /* ImageDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ImageDataSource.swift; path = ImageGallery/ViewModel/ImageDataSource.swift; sourceTree = SOURCE_ROOT; };
 		E8A942CF26ABFC5C00B8C9BC /* ImageDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDataModel.swift; sourceTree = "<group>"; };
 		E8A942D326ABFEFE00B8C9BC /* ImageDataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDataViewModel.swift; sourceTree = "<group>"; };
 		E8A942D926AC164F00B8C9BC /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
@@ -121,6 +127,9 @@
 			isa = PBXGroup;
 			children = (
 				E8A942D326ABFEFE00B8C9BC /* ImageDataViewModel.swift */,
+				E830665B26B059F70064451C /* DynamicValue.swift */,
+				E830665D26B05A110064451C /* GenericDataSource.swift */,
+				E830666126B05A7F0064451C /* ImageDataSource.swift */,
 			);
 			path = VIewModel;
 			sourceTree = "<group>";
@@ -204,13 +213,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E830665E26B05A110064451C /* GenericDataSource.swift in Sources */,
 				E82BB43E26AAB27300EDA7BC /* ViewController.swift in Sources */,
+				E830666226B05A7F0064451C /* ImageDataSource.swift in Sources */,
 				E8A942D026ABFC5C00B8C9BC /* ImageDataModel.swift in Sources */,
 				E82BB45426AAC72F00EDA7BC /* APIService.swift in Sources */,
 				E82BB43A26AAB27300EDA7BC /* AppDelegate.swift in Sources */,
 				E8A942D426ABFEFE00B8C9BC /* ImageDataViewModel.swift in Sources */,
 				E82BB44E26AAB54300EDA7BC /* ImageCollectionViewCell.swift in Sources */,
 				E82BB43C26AAB27300EDA7BC /* SceneDelegate.swift in Sources */,
+				E830665C26B059F70064451C /* DynamicValue.swift in Sources */,
 				E8A942DA26AC164F00B8C9BC /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

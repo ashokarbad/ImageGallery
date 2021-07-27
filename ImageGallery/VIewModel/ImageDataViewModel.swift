@@ -8,20 +8,26 @@
 import UIKit
 
 class ImageDataViewModel: NSObject {
-    let id, owner, secret, server: String
-    let farm: Int
-    let title: String
-
-    init(photo:Photo) {
-        self.id = photo.id
-        self.owner = photo.owner
-        self.secret = photo.secret
-        self.server = photo.server
-        self.farm = photo.farm
-        self.title = photo.title
+    
+    weak var dataSource : GenericDataSource<Photo>?
+    
+    init(dataSource : GenericDataSource<Photo>?) {
+        self.dataSource = dataSource
     }
     
-    func getImageUrl() -> String {
-        return "http://farm\(self.farm).static.flickr.com/\(self.server)/\(self.id)_\(self.secret).jpg"
+    func getImageData(searchText:String,page:Int) {
+        var imageData = [Photo]()
+        UIApplication.shared.windows[0].rootViewController?.view.endEditing(true)
+        let urlString = Utils().getFlickerAPIUrl(searchText: searchText, page: page)
+        APIService.sharedInstance.getImagesWithUrl(urlString: urlString) { imageDataModel, error in
+            if imageDataModel?.stat == "ok",imageDataModel?.photos?.photo.count ?? 0 > 0{
+                if let photo = imageDataModel?.photos?.photo{
+                    imageData.append(contentsOf: photo)
+                    self.dataSource?.data.value = imageData
+                }
+            }else{
+                CustomAlert().showAlertWithMessage(message: NSLocalizedString("label.alert.ImageData.noDataMessage", comment: ""), title: "")
+            }
+        }
     }
 }
