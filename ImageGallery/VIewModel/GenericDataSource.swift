@@ -28,7 +28,7 @@ class UpdateData {
         self.searchText = searchText
     }
     func refresh() {
-        viewModel.getImageData(searchText: searchText, page: page, isDataRefresh: false)
+        viewModel.getImageData(searchText: Utils.searchText, page:  Utils.page)
     }
 }
 

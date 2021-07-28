@@ -28,10 +28,10 @@ class ViewController: UIViewController {
         self.imageSearchBar?.delegate = self
         
         self.dataSource.data.addAndNotify(observer: self) { [weak self] in
-            self?.imageCollectionView?.reloadData()
+            self?.imageCollectionView?.reloadSections(IndexSet.init(integer: 0))
         }
         
-        viewModel.getImageData(searchText: self.imageSearchBar?.text ?? "", page: 1,isDataRefresh: false)
+        viewModel.getImageData(searchText: Utils.searchText, page: Utils.page)
         
     }
 }
@@ -40,7 +40,7 @@ extension ViewController : UISearchBarDelegate{
         guard let searchText = searchBar.searchTextField.text,!searchText.isEmpty else { return }
         Utils.page = 1
         self.imageCollectionView?.setContentOffset(.zero, animated: false)
-        viewModel.getImageData(searchText:searchText, page: 1, isDataRefresh: true)
+        viewModel.getImageData(searchText:searchText, page: 1)
         
     }
 }
