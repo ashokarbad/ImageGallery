@@ -15,15 +15,16 @@ class ImageDataViewModel: NSObject {
         self.dataSource = dataSource
     }
     
-    func getImageData(searchText:String,page:Int) {
-        var imageData = [Photo]()
+    func getImageData(searchText:String,page:Int,isDataRefresh:Bool) {
+        Utils.searchText = searchText
         UIApplication.shared.windows[0].rootViewController?.view.endEditing(true)
         let urlString = Utils().getFlickerAPIUrl(searchText: searchText, page: page)
         APIService.sharedInstance.getImagesWithUrl(urlString: urlString) { imageDataModel, error in
             if imageDataModel?.stat == "ok",imageDataModel?.photos?.photo.count ?? 0 > 0{
-                if let photo = imageDataModel?.photos?.photo{
-                    imageData.append(contentsOf: photo)
-                    self.dataSource?.data.value = imageData
+                if isDataRefresh {
+                    self.dataSource?.data.value = imageDataModel?.photos?.photo ?? []
+                }else{
+                    self.dataSource?.data.value.append(contentsOf: imageDataModel?.photos?.photo ?? [])
                 }
             }else{
                 CustomAlert().showAlertWithMessage(message: NSLocalizedString("label.alert.ImageData.noDataMessage", comment: ""), title: "")

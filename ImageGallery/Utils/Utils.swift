@@ -8,7 +8,8 @@
 import UIKit
 
 class Utils: NSObject {
-    
+    static var searchText = ""
+    static var page = 1
     func getUserDefinedParameter(keyName:String) -> String {
         if let parameter =  Bundle.main.object(forInfoDictionaryKey: keyName) as? String{
             return parameter

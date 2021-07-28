@@ -23,7 +23,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         self.imageSearchBar?.text = "kittens"
-        
         self.imageCollectionView?.dataSource = self.dataSource
         self.imageCollectionView?.delegate = self.dataSource
         self.imageSearchBar?.delegate = self
@@ -32,14 +31,16 @@ class ViewController: UIViewController {
             self?.imageCollectionView?.reloadData()
         }
         
-        viewModel.getImageData(searchText: self.imageSearchBar?.text ?? "", page: 1)
+        viewModel.getImageData(searchText: self.imageSearchBar?.text ?? "", page: 1,isDataRefresh: false)
         
     }
 }
 extension ViewController : UISearchBarDelegate{
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchText = searchBar.searchTextField.text,!searchText.isEmpty else { return }
-        viewModel.getImageData(searchText:searchText, page: 1)
+        Utils.page = 1
+        self.imageCollectionView?.setContentOffset(.zero, animated: false)
+        viewModel.getImageData(searchText:searchText, page: 1, isDataRefresh: true)
         
     }
 }

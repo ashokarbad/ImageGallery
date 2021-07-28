@@ -7,10 +7,9 @@
 
 import UIKit
 
-class ImageDataSource: GenericDataSource<Photo>, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
+class ImageDataSource: GenericDataSource<Photo>, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UICollectionViewDelegate {
     
     let columnCount : CGFloat = 3
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return data.value.count
     }
@@ -24,6 +23,15 @@ class ImageDataSource: GenericDataSource<Photo>, UICollectionViewDataSource,UICo
             }
         }
         return UICollectionViewCell()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
+        if indexPath.row == data.value.count - 1 {
+            Utils.page += 1
+            let updateData = UpdateData(dataSource: self, searchText: Utils.searchText, page: Utils.page)
+            updateData.refresh()
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
